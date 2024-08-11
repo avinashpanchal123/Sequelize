@@ -8,11 +8,6 @@ const connector = new Sequelize('my_money', 'root', 'Avinash@123', {
 })
 
 // console.log(connector)
-connector.authenticate().then(()=>{
-    console.log("Connection Successfull")
-}).catch((err)=>{
-    console.log(err, 'Connection Failed')
-})
 
 // async function testConnection(){
 //     try{
@@ -26,28 +21,4 @@ connector.authenticate().then(()=>{
 
 // testConnection()
 
-const user = connector.define('user',{
-    name : {
-        type : DataTypes.STRING(100),
-        allowNull : false
-    },
-    password : {
-        type: DataTypes.STRING(100),
-        allowNull: false
-    }
-})
-
-
-connector.sync().then(()=>{
-    // console.log("user table created successfully!")
-    user.create({
-        name : 'avinash',
-        password : 'avinash@123'
-    }).then((res)=>{
-        console.log(res, 'insertion successfull')
-    }).catch((err)=>{
-        console.log(err, 'error while inserting the data to user table')
-    })
-}).catch((error)=>{
-    console.log('Unable to create table : ', error)
-})
+module.exports = connector
